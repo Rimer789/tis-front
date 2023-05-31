@@ -1,0 +1,78 @@
+.parqueo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 10px;
+}
+  
+
+  .grillaTop {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+    width: 500px;
+    height: 350;
+    background-color: #ffffff;
+    border: 7px solid #ffffff;
+    padding: 2px;
+  }
+  .grillaBot {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5px;
+    width: 500px;
+    height: 350;
+    background-color: #ffffff;
+    border: 7px solid #ffffff;
+    padding: 2px;
+  }
+
+  
+  .celda {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #b80101;
+    border: 1px solid #f1f1f1;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+    height: 50px;
+    width: 35px;
+  }
+  
+  .celda:hover {
+    border-color: black;
+    border-width: 3px;
+    color:white;
+
+  }
+
+  .fila-titulo {
+    font-weight: bold;
+    text-align: center;
+    background-color: #f1f1f1;
+  }
+
+
+  .estado-ocupado {
+    background-color: red;
+    color:transparent
+  }
+  
+  .estado-libre {
+    background-color: green;
+    color:transparent
+  }
+  
+  .estado-reservado {
+    background-color: yellow;
+    color:transparent
+  }
