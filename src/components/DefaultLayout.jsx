@@ -1,11 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState} from 'react';
 import { Link, Navigate, Outlet } from 'react-router-dom';
 import { useStateContext } from '../contexts/ContextProvider';
 import axiosClient from '../axios-client';
+import { HiOutlineUserCircle } from "react-icons/hi";
+import "../styles/info/User.css"
 
 export default function DefaultLayout() {
+  const [showUserInfo, setShowUserInfo] = useState(false);
   const { user, token, notification, setUser, setToken, setRol, rol } = useStateContext();
   const asideClass = `aside-${rol.rol}`;
+
+  function handleUserIconClick() {
+    setShowUserInfo(!showUserInfo);
+  }
 
   useEffect(() => {
     axiosClient.get('/user').then(({ data }) => {
@@ -70,13 +77,18 @@ export default function DefaultLayout() {
 
       <div className="content">
         <header>
-          <div>Header</div>
-          <div>
-            {user.name}
-            <a href="#" onClick={onLogout} className="btn-logout">
+          
+          <div className="user-info">
+      <HiOutlineUserCircle size={40} onClick={handleUserIconClick} /> 
+      {showUserInfo && (
+        <div className="user-details">
+          Nombre: {user.name}
+          <a href="#" onClick={onLogout} className="btn-logout">
               Logout
             </a>
-          </div>
+        </div>
+      )}
+    </div>
         </header>
 
         <main>
