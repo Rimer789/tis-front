@@ -40,13 +40,11 @@ export default function DefaultLayout() {
     <div id="defaultLayout">
       <aside className={asideClass}>
         <Link to="/parqueo">Parqueo</Link>
-        <Link to="/reservaSimple">Reserva Simple</Link>
-        <Link to="/reservaDetallada">Reserva Detallada</Link>
+        
 
         {rol.rol === 'administrador' && (
           <>
             <Link to="/opcionesAdministrador">Opciones Administrador</Link>
-            <Link to="/accesos">Accesos</Link>
             <Link to="/users">Clientes</Link>
             <Link to="/reservas">Ver Reservas</Link>
             <Link to="/cobros">Cobros</Link>
@@ -59,6 +57,7 @@ export default function DefaultLayout() {
           <>
             <Link to="/opcionesGuardia">Opciones Guardia</Link>
             <Link to="/accesos">Accesos</Link>
+            <Link to="/reservaDetallada">Reserva Detallada</Link>
           </>
         )}
 
@@ -83,6 +82,8 @@ export default function DefaultLayout() {
       {showUserInfo && (
         <div className="user-details">
           Nombre: {user.name}
+          <br/>
+          <br/>
           <a href="#" onClick={onLogout} className="btn-logout">
               Logout
             </a>

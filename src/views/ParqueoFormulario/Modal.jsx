@@ -1,10 +1,77 @@
 
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useRef} from 'react';
+import { useStateContext } from '../../contexts/ContextProvider';
 import '../../styles/ParqueoFormulario/Modal.css';
+import DatePicker from 'react-datepicker';
 import axiosClient from '../../axios-client';
+import 'react-datepicker/dist/react-datepicker.css';
+import 'react-datetime/css/react-datetime.css';
+import { format, differenceInMinutes } from 'date-fns';
 
 const Modal = ({ isOpen, onClose, fila, columna }) => {
+  const { user, token, notification, setUser, setToken, setRol, rol } = useStateContext();
+
+  const nameRef = useRef();
+  const celular = useRef();
+  const ciRef = useRef();
+  const paternoRef = useRef();
+  const maternoRef = useRef();
+  const espacioLetraRef = useRef();
+  const espacioNumeroRef = useRef();
+  const placa = useRef();
+
+  const [errors, setErrors] = useState(null);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [timeDifference, setTimeDifference] = useState(null);
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [payload, setPayload] = useState(null);
+
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+  };
+
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+  };
+
+  const calculateTimeDifference = () => {
+    const timeDifferenceInMinutes = differenceInMinutes(endDate, startDate);
+    setTimeDifference(timeDifferenceInMinutes);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const formattedStartDate = format(startDate, 'dd/MM/yyyy HH:mm');
+    const formattedEndDate = format(endDate, 'dd/MM/yyyy HH:mm');
+    calculateTimeDifference();
+
+    const payloadData = {
+      name: user.name,
+      celular: user.celular,
+      ci: user.ci,
+      apellido_paterno: user.apellido_paterno,
+      apellido_materno: user.apellido_materno,
+      espacio: `${columna + fila}`,
+      tiempoIni: formattedStartDate,
+      tiempoFin: formattedEndDate,
+      estado:'reservado',
+      placa: placa.value,
+    };
+
+    setPayload(payloadData);
+    console.log(payloadData);
+    console.log(`Diferencia de tiempo en minutos: ${timeDifference}`);
+
+    setIsConfirmed(true);
+  };
+
+  const handleConfirm = () => {
+    axiosClient.post('/reservar', payload);//reservar espacio de lado cliente
+    setIsConfirmed(false);
+  };
+
+
   const [estado, setEstado] = useState('');
   const [pestañaActual, setPestañaActual] = useState('estado');
 
@@ -29,17 +96,59 @@ const Modal = ({ isOpen, onClose, fila, columna }) => {
         <h2>Estado: Espacio {estado}</h2>
       </>
     ),
-    registrar: (
-      <>
-        <h2>Registrar nuevo espacio</h2>
-        {/* Agrega aquí el formulario de registro */}
-      </>
-    ),
+    
     reservar: (
-      <>
-        <h2>Reservar espacio</h2>
-        {/* Agrega aquí el formulario de reserva */}
-      </>
+      
+        <div className='form'>
+        {!isConfirmed ? (
+          <form onSubmit={onSubmit}>
+            <h1 className='title'>Registrar</h1>
+
+           
+            <input ref={placa} placeholder='Nro Placa' />
+            
+            <br/>
+            <label>hora inicio:</label>
+            <DatePicker
+              selected={startDate}
+              onChange={handleStartDateChange}
+              minDate={new Date()}
+              minTime={new Date().getHours() + ':' + new Date().getMinutes()}
+              maxTime='23:59'
+              showTimeSelect
+              timeFormat='HH:mm'
+              timeIntervals={15}
+              dateFormat='MMMM d, yyyy h:mm aa'
+            />
+            <br />
+            <label>hora fin:</label>
+            <DatePicker
+              selected={endDate}
+              onChange={handleEndDateChange}
+              minDate={startDate}
+              minTime={new Date().getHours() + ':' + new Date().getMinutes()}
+              maxTime='23:59'
+              showTimeSelect
+              timeFormat='HH:mm'
+              timeIntervals={15}
+              dateFormat='MMMM d, yyyy h:mm aa'
+            />
+            <button className='btn btn-block' type='submit'>
+              Reservar
+            </button>
+          </form>
+        ) : (
+          <div>
+            <h1>Costo Total: {timeDifference} bs</h1>
+            <h1>aqui va QR</h1>
+            <button className='btn btn-block' onClick={handleConfirm}>
+              Confirmar
+            </button>
+            <br />
+          </div>
+        )}
+      </div>
+      
     ),
   };
 

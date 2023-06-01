@@ -24,7 +24,7 @@ const Parqueo = ({ onParqueoClick }) => {
     console.log(`Celda clicada: fila ${fila}, columna ${columna}`);
     setFilaSeleccionada(fila);
     setColumnaSeleccionada(columna);
-    setModalOpen(false);//colocar true para ver el modal
+    setModalOpen(true);//colocar true para ver el modal
     onParqueoClick(fila, columna); //llama a la funcion del comp padre
   };
 

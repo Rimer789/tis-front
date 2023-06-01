@@ -1,14 +1,17 @@
 .user-info {
   position: relative;
-  margin-right: 5%;
+  justify-items: end;
+  left: 90%;
+
 }
 
 .user-details {
-  position: absolute;
+  align-items: start;
+  align-content: flex-start;
   top: 100%;
   left: 0;
-  background-color: white;
-  padding: 10px;
-  border: 1px solid black;
+  background-color: rgb(138, 159, 187);
+  padding:10px;
+  border: 1px solid rgb(0, 0, 0);
 }
 
