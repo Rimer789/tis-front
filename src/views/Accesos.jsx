@@ -1,136 +1,92 @@
-import React, { useState } from 'react'
-import '../styles/Accesos.css'
+import React, { useEffect, useState } from 'react';
+import axiosClient from '../axios-client';
+import { useStateContext } from '../contexts/ContextProvider';
 
-export default function Accesos() {
-  const handleRegistrar = (e) => {
-    e.preventDefault()
-  }
+const RegistroVehiculos = () => {
+  const [vehiculos, setVehiculos] = useState([]);
+  const [selectedUser, setSelectedUser] = useState('');
+  const [users, setUsers] = useState([]);
 
-  const [selectedOption, setSelectedOption] = useState('');
+  useEffect(() => {
+    getUsers();
+  }, []);
 
-  const handleCheckboxChange = (option) => {
-    setSelectedOption(option);
+  const getUsers = () => {
+    axiosClient.get('/users')
+      .then(({ data }) => {
+        setUsers(data.data);
+      });
   };
 
-  const [selectedTab, setSelectedTab] = useState('negro');
-
-  const handleTabChange = (tab) => {
-    setSelectedTab(tab);
+  const agregarVehiculo = () => {
+    const fechaActual = new Date().toLocaleDateString();
+    const horaActual = new Date().toLocaleTimeString();
+    const usuarioSeleccionado = users.find(user => user.ci === selectedUser);
+    if (usuarioSeleccionado) {
+      const nuevoVehiculo = {
+        placa: usuarioSeleccionado.ci,
+        horaIngreso: `${fechaActual} ${horaActual}`,
+        horaSalida: 'Ocupado',
+      };
+      setVehiculos([...vehiculos, nuevoVehiculo]);
+    }
+    setSelectedUser('');
   };
 
-  const [selectedNumber, setSelectedNumber] = useState('');
-  const [selectedLetter, setSelectedLetter] = useState('');
-
-  const handleNumberChange = (event) => {
-    setSelectedNumber(event.target.value);
-  };
-
-  const handleLetterChange = (event) => {
-    setSelectedLetter(event.target.value);
+  const registrarSalida = (index) => {
+    const fechaActual = new Date().toLocaleDateString();
+    const horaSalidaActual = new Date().toLocaleTimeString();
+    const vehiculosActualizados = [...vehiculos];
+    vehiculosActualizados[index].horaSalida = `${fechaActual} ${horaSalidaActual}`;
+    setVehiculos(vehiculosActualizados);
   };
 
   return (
-    // <div className="container">
-    //   <div className="top">
-    //     <div className="section"></div>
-    //     <div className="section"></div>
-    //     <div className="section"></div>
-    //   </div>
-    //   <div className="bottom"></div>
-
-    // </div>
-    <div className="container">
-      <div className="top">
-        <div className="part part1">
-          <h2>Ingreso:</h2>
-          <p>Placa Vehiculo:</p>
-          <input type="text" className="textbox" />
-        </div>
-
-        <div className="part part2">
-          <div>
-            <div className="tab-container">
-              <div
-                className={`tab ${selectedTab === 'negro' ? 'selected' : ''}`}
-                onClick={() => handleTabChange('negro')}
-              >
-                Negro
-              </div>
-              <div
-                className={`tab ${selectedTab === 'rojo' ? 'selected' : ''}`}
-                onClick={() => handleTabChange('rojo')}
-              >
-                Rojo
-              </div>
-            </div>
-
-            <div className={`content ${selectedTab}`}>
-              {selectedTab === 'negro' ? (
-                <div>
-                  <p>Seleccionar espacio:</p>
-                  <div className="dropdown-container">
-                    <div className="dropdown">
-                      <label htmlFor="numberDropdown">Número:</label>
-                      <select id="numberDropdown" value={selectedNumber} onChange={handleNumberChange}>
-                        <option value="">Seleccionar número</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                      </select>
-                    </div>
-
-                    <div className="dropdown">
-                      <label htmlFor="letterDropdown">Letra:</label>
-                      <select id="letterDropdown" value={selectedLetter} onChange={handleLetterChange}>
-                        <option value="">Seleccionar letra</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                      </select>
-                    </div>
-
-                    <div className="combination-box">
-                      {selectedNumber && selectedLetter && (
-                        <p>{selectedNumber}{selectedLetter}</p>
-                      )}
-                    </div>
-                  </div>
-
-
-
-                </div>
-              ) : (
-                <div>
-                  <div className='automatico-container'>
-                  Contenido de la pestaña rojo
-                  <p>casa</p>
-                  <div className="combination-box">
-                      {selectedNumber && selectedLetter && (
-                        <p>{selectedNumber}{selectedLetter}</p>
-                      )}
-                    </div>
-
-                  </div>
-
-              
-                </div>
-              )}
-            </div>
-          </div>
-
-
-        </div>
-        <div className="part part3">
-          <button className="registerButton">Registrar</button>
-        </div>
+    <div>
+      <h1>Registro de Ingreso y Salida de Vehículos</h1>
+      <div>
+        <label>Usuario:</label>
+        <select
+          value={selectedUser}
+          onChange={(e) => setSelectedUser(e.target.value)}
+        >
+          <option value="">Seleccione un usuario</option>
+          {users.map(user => (
+            <option key={user.ci} value={user.ci}>{user.ci}</option>
+          ))}
+        </select>
       </div>
-      <div className="bottom">
-        <div className="part part4"></div>
-        <div className="part part5"></div>
-        <div className="part part6"></div>
-      </div>
+      <button onClick={agregarVehiculo}>Registrar ingreso</button>
+
+      <h2>Vehículos registrados:</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Placa</th>
+            <th>Hora de ingreso</th>
+            <th>Hora de salida</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {vehiculos.map((vehiculo, index) => (
+            <tr key={index}>
+              <td>{vehiculo.placa}</td>
+              <td>{vehiculo.horaIngreso}</td>
+              <td>{vehiculo.horaSalida}</td>
+              <td>
+                {vehiculo.horaSalida === 'Ocupado' ? (
+                  <button onClick={() => registrarSalida(index)}>
+                    Registrar salida
+                  </button>
+                ) : null}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-  )
-}
+  );
+};
+
+export default RegistroVehiculos;

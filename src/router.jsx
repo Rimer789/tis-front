@@ -7,6 +7,7 @@ import DefaultLayout from "./components/DefaultLayout";
 import GuestLayout from "./components/GuestLayout";
 import Dashboard from "./views/Dashboard";
 import UserForm from "./views/UserForm";
+import VehiculoForm from "./views/VehiculoForm";
 
 import ReservaSimple from "./views/ReservaSimple";
 import ReservaDetallada from "./views/ReservaDetallada";
@@ -35,6 +36,9 @@ const router = createBrowserRouter([
             {path: '/', element: <Navigate to = "/parqueo" />},
             {path: '/users/new', element: <UserForm key="userCreate"/>},
             {path: '/users/:id', element: <UserForm key="userUpdate"/>},
+            {path: '/vehiculos/new', element: <VehiculoForm key="vehiculoCreate"/>},
+            {path: '/vehiculos/:id', element: <VehiculoForm key="vehiculoUpdate"/>},
+
 
             {path: '/parqueo', element: <ParqueoFormulario/>},
             {path: '/reservaSimple', element: <ReservaSimple/>},

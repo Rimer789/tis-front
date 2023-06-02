@@ -11,13 +11,6 @@ import { format, differenceInMinutes } from 'date-fns';
 const Modal = ({ isOpen, onClose, fila, columna }) => {
   const { user, token, notification, setUser, setToken, setRol, rol } = useStateContext();
 
-  const nameRef = useRef();
-  const celular = useRef();
-  const ciRef = useRef();
-  const paternoRef = useRef();
-  const maternoRef = useRef();
-  const espacioLetraRef = useRef();
-  const espacioNumeroRef = useRef();
   const placa = useRef();
 
   const [errors, setErrors] = useState(null);
@@ -26,6 +19,19 @@ const Modal = ({ isOpen, onClose, fila, columna }) => {
   const [timeDifference, setTimeDifference] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [payload, setPayload] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState('');
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = () => {
+    axiosClient.get('/users')
+      .then(({ data }) => {
+        setUsers(data.data);
+      });
+  };
 
   const handleStartDateChange = (date) => {
     setStartDate(date);
@@ -105,7 +111,18 @@ const Modal = ({ isOpen, onClose, fila, columna }) => {
             <h1 className='title'>Registrar</h1>
 
            
-            <input ref={placa} placeholder='Nro Placa' />
+            <div>
+        <label>Usuario:</label>
+        <select
+          value={selectedUser}
+          onChange={(e) => setSelectedUser(e.target.value)}
+        >
+          <option value="">Seleccione un usuario</option>
+          {users.map(user => (
+            <option key={user.ci} value={user.ci}>{user.ci}</option>
+          ))}
+        </select>
+      </div>
             
             <br/>
             <label>hora inicio:</label>

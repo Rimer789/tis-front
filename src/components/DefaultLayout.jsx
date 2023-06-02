@@ -63,7 +63,7 @@ export default function DefaultLayout() {
 
         {rol.rol === 'cliente' && (
           <>
-            <Link to="/opcionesCliente">Opciones Cliente</Link>
+            <Link to="/opcionesCliente">Mis Vehiculos</Link>
             <Link to="/historial">Historial</Link>
             <Link to="/deudas">Deudas</Link>
           </>
