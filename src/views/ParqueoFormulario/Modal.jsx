@@ -19,15 +19,15 @@ const Modal = ({ isOpen, onClose, fila, columna }) => {
   const [timeDifference, setTimeDifference] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [payload, setPayload] = useState(null);
-  const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState('');
+  const [users, setUsers] = useState([]);       //cambiar para resevir todos los autos del usuario
+  const [selectedUser, setSelectedUser] = useState('');   //cambiar para resevir todos los autos del usuario
 
-  useEffect(() => {
+  useEffect(() => {    //cambiar para resevir todos los autos del usuario
     getUsers();
   }, []);
 
   const getUsers = () => {
-    axiosClient.get('/users')
+    axiosClient.get('/users')    //cambiar para resevir todos los autos del usuario
       .then(({ data }) => {
         setUsers(data.data);
       });
