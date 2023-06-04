@@ -55,7 +55,7 @@ export default function Users() {
               <th>Email</th>
               <th>Create Date</th>
               <th>numero</th>
-              <th>ci</th>
+              <th></th>
             </tr>
           </thead>
           {loading && 

@@ -8,6 +8,7 @@ import GuestLayout from "./components/GuestLayout";
 import Dashboard from "./views/Dashboard";
 import UserForm from "./views/UserForm";
 import VehiculoForm from "./views/VehiculoForm";
+import GuardiaForm from "./views/GuardiaForm";
 
 import ReservaSimple from "./views/ReservaSimple";
 import ReservaDetallada from "./views/ReservaDetallada";
@@ -26,6 +27,7 @@ import OpcionesCliente from "./views/OpcionesCliente";
 import Comunicados from "./views/Comunicados";
 import ParqueoFormulario from "./views/ParqueoFormulario";
 
+
 const router = createBrowserRouter([
     {
         path: '/',
@@ -36,8 +38,10 @@ const router = createBrowserRouter([
             {path: '/', element: <Navigate to = "/parqueo" />},
             {path: '/users/new', element: <UserForm key="userCreate"/>},
             {path: '/users/:id', element: <UserForm key="userUpdate"/>},
-            {path: '/vehiculos/new', element: <VehiculoForm key="vehiculoCreate"/>},
+            {path: '/vehiculos/new', element: <VehiculoForm key="createVehiculo"/>},
             {path: '/vehiculos/:id', element: <VehiculoForm key="vehiculoUpdate"/>},
+            {path: '/guardias/new', element: <GuardiaForm key="guardiaCreate"/>},
+            {path: '/guardias/:id', element: <GuardiaForm key="guardiaUpdate"/>},
 
 
             {path: '/parqueo', element: <ParqueoFormulario/>},

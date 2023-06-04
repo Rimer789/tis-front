@@ -9,6 +9,7 @@ const RegistroVehiculos = () => {
 
   useEffect(() => {
     getUsers();
+    getIngresoSalida();
   }, []);
 
   const getUsers = () => {
@@ -18,17 +19,32 @@ const RegistroVehiculos = () => {
       });
   };
 
+  const getIngresoSalida = () => {
+    axiosClient.get('/IngresoSalida')
+      .then(({ data }) => {
+        setVehiculos(data.data);
+      });
+  };
+
   const agregarVehiculo = () => {
     const fechaActual = new Date().toLocaleDateString();
     const horaActual = new Date().toLocaleTimeString();
     const usuarioSeleccionado = users.find(user => user.ci === selectedUser);
-    if (usuarioSeleccionado) {
-      const nuevoVehiculo = {
-        placa: usuarioSeleccionado.ci,
-        horaIngreso: `${fechaActual} ${horaActual}`,
-        horaSalida: 'Ocupado',
-      };
-      setVehiculos([...vehiculos, nuevoVehiculo]);
+    const vehiculoYaRegistrado = vehiculos.some(vehiculo => vehiculo.placa === usuarioSeleccionado.ci && vehiculo.horaSalida === 'Ocupado');
+    if (!vehiculoYaRegistrado) {
+      if (usuarioSeleccionado) {
+        const nuevoVehiculo = {
+          placa: usuarioSeleccionado.ci,
+          horaIngreso: `${fechaActual} ${horaActual}`,
+          horaSalida: 'Ocupado',
+        };
+        axiosClient.post('/IngresoSalida', nuevoVehiculo)
+          .then(() => {
+            setVehiculos([...vehiculos, nuevoVehiculo]);
+          });
+      }
+    } else {
+      alert('Ya se ha registrado el ingreso de este vehículo.');
     }
     setSelectedUser('');
   };
@@ -37,8 +53,13 @@ const RegistroVehiculos = () => {
     const fechaActual = new Date().toLocaleDateString();
     const horaSalidaActual = new Date().toLocaleTimeString();
     const vehiculosActualizados = [...vehiculos];
-    vehiculosActualizados[index].horaSalida = `${fechaActual} ${horaSalidaActual}`;
-    setVehiculos(vehiculosActualizados);
+    if (vehiculosActualizados[index].horaSalida !== 'Ocupado') {
+      vehiculosActualizados[index].horaSalida = `${fechaActual} ${horaSalidaActual}`;
+      axiosClient.post('/IngresoSalida', vehiculosActualizados[index])
+        .then(() => {
+          setVehiculos(vehiculosActualizados);
+        });
+    }
   };
 
   return (
@@ -56,7 +77,9 @@ const RegistroVehiculos = () => {
           ))}
         </select>
       </div>
-      <button onClick={agregarVehiculo}>Registrar ingreso</button>
+      <button onClick={agregarVehiculo} disabled={selectedUser === ''}>
+        Registrar ingreso
+      </button>
 
       <h2>Vehículos registrados:</h2>
       <table>

@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams,Link } from 'react-router-dom';
+import { useNavigate, useParams, Link} from 'react-router-dom';
 import axiosClient from '../axios-client';
 import { useStateContext } from '../contexts/ContextProvider';
 
-export default function VehiculoForm() {
+export default function GuardiaForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState(null);
   const { setNotification } = useStateContext();
 
-  const [vehiculo, setVehiculo] = useState({
-    placa: '',
-    modelo: '',
-    marca: '',
-    color: '',
+  const [guardia, setGuardia] = useState({
+    id: null,
+    name: '',
+    email: '',
+    rol:'guardia',
+    password: '',
+    password_confirmation: ''
   });
 
   useEffect(() => {
     if (id) {
       setLoading(true);
       axiosClient
-        .get(`/vehiculos/${id}`)
+        .get(`/guardias/${id}`)
         .then(({ data }) => {
           setLoading(false);
-          setVehiculo(data);
+          setGuardia(data);
         })
         .catch(() => {
           setLoading(false);
@@ -34,12 +36,13 @@ export default function VehiculoForm() {
 
   const onSubmit = (ev) => {
     ev.preventDefault();
-    if (vehiculo.id) {
+    if (guardia.id) {
       axiosClient
-        .put(`/vehiculos/${vehiculo.id}`, vehiculo)
+        .put(`/guardias/${guardia.id}`, guardia)
         .then(() => {
-          setNotification('Se ha modificado tu vehiculo');
-          navigate('/vehiculos');
+          //todo show notification
+          setNotification('Se ha modificado el usuario');
+          navigate('/guardias');
         })
         .catch((err) => {
           const response = err.response;
@@ -50,10 +53,10 @@ export default function VehiculoForm() {
         });
     } else {
       axiosClient
-        .post(`/create-vehiculo`, vehiculo)
+        .post(`/guardias`, guardia)
         .then(() => {
-          setNotification('Se ha anadio nuevo vehiculo');
-          navigate('/vehiculos');
+          setNotification('Se ha creado el usuario');
+          navigate('/guardias');
         })
         .catch((err) => {
           const response = err.response;
@@ -67,8 +70,8 @@ export default function VehiculoForm() {
 
   return (
     <>
-      {vehiculo.id && <h1>Editar  vehiculo: {vehiculo.placa}</h1>}
-      {!vehiculo.id && <h1>Anadir nuevo vehiculo</h1>}
+      {guardia.id && <h1>Update guardia: {guardia.name}</h1>}
+      {!guardia.id && <h1>New guardia</h1>}
       <div className="card animated fadeInDown">
         {loading && <div className="text-centered">Cargando...</div>}
         {errors && (
@@ -82,27 +85,30 @@ export default function VehiculoForm() {
         {!loading && (
           <form onSubmit={onSubmit}>
             <input
-              value={vehiculo.placa}
-              onChange={(ev) => setVehiculo({ ...vehiculo, placa: ev.target.value })}
-              placeholder="placa"
+              value={guardia.name}
+              onChange={(ev) => setGuardia({ ...guardia, name: ev.target.value })}
+              placeholder="Name"
             />
             <input
-              value={vehiculo.modelo}
-              onChange={(ev) => setVehiculo({ ...vehiculo, modelo: ev.target.value })}
-              placeholder="modelo"
+              type="email"
+              value={guardia.email}
+              onChange={(ev) => setGuardia({ ...guardia, email: ev.target.value })}
+              placeholder="Email"
             />
             <input
-              onChange={(ev) => setVehiculo({ ...vehiculo, marca: ev.target.value })}
-              placeholder="marca"
+              type="password"
+              onChange={(ev) => setGuardia({ ...guardia, password: ev.target.value })}
+              placeholder="Password"
             />
             <input
-              onChange={(ev) => setVehiculo({ ...vehiculo, color: ev.target.value })}
-              placeholder="color"
+              type="password"
+              onChange={(ev) =>
+                setGuardia({ ...guardia, password_confirmation: ev.target.value })
+              }
+              placeholder="Password Confirmation"
             />
-            <button className="btn-add">Guardar</button>
-            <br/>
-            <br/>
-            <Link to={'/opcionesCliente'} className="btn-add">Atras</Link>
+            <button className="btn-add">Save</button>
+            <Link to={'/guardias'} className="btn-add">Atras</Link>
           </form>
         )}
       </div>

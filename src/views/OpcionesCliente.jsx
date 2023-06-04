@@ -29,7 +29,7 @@ export default function Vehiculos() {
   const getVehiculos = () => {
     setLoading(true);
     axiosClient
-      .get('/vehiculos')
+      .get('/stli-vehiculo')
       .then(({ data }) => {
         setLoading(false);
         console.log(data);
@@ -54,6 +54,7 @@ export default function Vehiculos() {
               <th>Placa</th>
               <th>Modelo</th>
               <th>Marca</th>
+              <th>Color</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -74,6 +75,7 @@ export default function Vehiculos() {
                   <td>{vehiculo.placa}</td>
                   <td>{vehiculo.modelo}</td>
                   <td>{vehiculo.marca}</td>
+                  <td>{vehiculo.color}</td>
                   <td>
                     <Link className='btn-edit' to={'/vehiculos/'+vehiculo.id}>Edit</Link>
                     &nbsp;

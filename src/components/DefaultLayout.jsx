@@ -44,7 +44,7 @@ export default function DefaultLayout() {
 
         {rol.rol === 'administrador' && (
           <>
-            <Link to="/opcionesAdministrador">Opciones Administrador</Link>
+            <Link to="/opcionesAdministrador">Enviar Comunicados</Link>
             <Link to="/users">Clientes</Link>
             <Link to="/reservas">Ver Reservas</Link>
             <Link to="/cobros">Cobros</Link>
@@ -66,10 +66,11 @@ export default function DefaultLayout() {
             <Link to="/opcionesCliente">Mis Vehiculos</Link>
             <Link to="/historial">Historial</Link>
             <Link to="/deudas">Deudas</Link>
+            <Link to="/comunicados">Comunicados</Link>
           </>
         )}
 
-        <Link to="/comunicados">Comunicados</Link>
+       
         <Link to="/precios">Precios</Link>
         <Link to="/cuenta">Cuenta</Link>
       </aside>
