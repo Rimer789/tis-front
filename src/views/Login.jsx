@@ -41,11 +41,9 @@ export default function Login() {
         <div className='login-signup-form animated fadeInDown'>
             <nav class="nav">
                 <a href='#' class="nav_logo">Code Genius</a>
-                <button class="button">Iniciar Sesión</button>
             </nav>
             <section className="fondo">
                 <div className='form_container'>
-                    <span className="material-icons form_close">close</span>
                     <div class="form_imputs">
                         <form action="#" onSubmit={onSubmit}>
                             <h1 className='title'>
