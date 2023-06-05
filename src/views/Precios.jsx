@@ -1,8 +1,9 @@
 import React from 'react';
+import '../styles/info/User.css'
 
 export default function Precios() {
-  const tarifaAuto = 10; // Tarifa inicial para autos
-  const tarifaMoto = 5; // Tarifa inicial para motos
+  const tarifaAuto = 4; // Tarifa inicial para autos
+  const tarifaMoto = 2; // Tarifa inicial para motos
   const descuentoPorHora = 0.18; // Descuento por hora adicional a partir de la segunda hora
 
   const generarTablaPrecios = () => {
@@ -55,23 +56,23 @@ export default function Precios() {
     <th>moto</th>
   </tr>
 </thead>
+<tr>
+   <td>mes dia</td>
+   <td>8:00 am - 8:00 pm</td>
+   <td>500</td>
+   <td>200</td>
+</tr>
 <tbody>
-   <th>mes dia</th>
-   <th>8:00 am - 8:00 pm</th>
-   <th>500</th>
-   <th>200</th>
+   <td>mes noche</td>
+   <td>8:00 pm - 8:00 am</td>
+   <td>350</td>
+   <td>100</td>
 </tbody>
 <tbody>
-   <th>mes noche</th>
-   <th>8:00 pm - 8:00 am</th>
-   <th>350</th>
-   <th>100</th>
-</tbody>
-<tbody>
-   <th>mes mixto</th>
-   <th>24 horas</th>
-   <th>600</th>
-   <th>300</th>
+   <td>mes mixto</td>
+   <td>24 horas</td>
+   <td>600</td>
+   <td>300</td>
 </tbody>
 
       </table>

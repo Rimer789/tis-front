@@ -9,6 +9,7 @@ import 'react-datetime/css/react-datetime.css';
 import { format, differenceInMinutes } from 'date-fns';
 
 const Modal = ({ isOpen, onClose, fila, columna }) => {
+  const [vehiculos, setVehiculos] = useState([]);
   const { user, token, notification, setUser, setToken, setRol, rol } = useStateContext();
 
   const placa = useRef();
@@ -21,6 +22,24 @@ const Modal = ({ isOpen, onClose, fila, columna }) => {
   const [payload, setPayload] = useState(null);
   const [users, setUsers] = useState([]);       //cambiar para resevir todos los autos del usuario
   const [selectedUser, setSelectedUser] = useState('');   //cambiar para resevir todos los autos del usuario
+
+  useEffect(() => {
+    getVehiculos();
+  }, []);
+
+  const getVehiculos = () => {
+    
+    axiosClient
+      .get('/list-vehiculo')
+      .then(({ data }) => {
+        
+        console.log(data);
+        if (Array.isArray(data)) {
+          setVehiculos(data);
+        }
+      })
+      
+  };
 
   useEffect(() => {    //cambiar para resevir todos los autos del usuario
     getUsers();
@@ -42,27 +61,27 @@ const Modal = ({ isOpen, onClose, fila, columna }) => {
   };
 
   const calculateTimeDifference = () => {
-    const timeDifferenceInMinutes = differenceInMinutes(endDate, startDate);
+    const timeDifferenceInMinutes =  Math.round (differenceInMinutes(endDate, startDate)*0.2);
     setTimeDifference(timeDifferenceInMinutes);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const formattedStartDate = format(startDate, 'dd/MM/yyyy HH:mm');
-    const formattedEndDate = format(endDate, 'dd/MM/yyyy HH:mm');
+    const formattedStartDate = format(startDate, 'yyyy-MM-dd HH:mm');
+    const formattedEndDate = format(endDate, 'yyyy-MM-dd HH:mm');
     calculateTimeDifference();
 
     const payloadData = {
       name: user.name,
-      celular: user.celular,
+      //celular: user.celular,
       ci: user.ci,
       apellido_paterno: user.apellido_paterno,
       apellido_materno: user.apellido_materno,
-      espacio: `${columna + fila}`,
+      espacio: `${fila + columna}`,
       tiempoIni: formattedStartDate,
       tiempoFin: formattedEndDate,
       estado:'reservado',
-      placa: placa.value,
+      placa: selectedUser,
     };
 
     setPayload(payloadData);
@@ -91,7 +110,7 @@ const Modal = ({ isOpen, onClose, fila, columna }) => {
         .catch(error => {
           console.log(error);
         })
-  }, [fila, columna]);
+  }, [columna, fila]);
 
 
 
@@ -118,8 +137,8 @@ const Modal = ({ isOpen, onClose, fila, columna }) => {
           onChange={(e) => setSelectedUser(e.target.value)}
         >
           <option value="">Seleccione un usuario</option>
-          {users.map(user => (
-            <option key={user.ci} value={user.ci}>{user.ci}</option>
+          {vehiculos.map(vehiculo => (
+            <option key={vehiculo.placa} value={vehiculo.placa}>{vehiculo.placa}</option>
           ))}
         </select>
       </div>
@@ -155,9 +174,9 @@ const Modal = ({ isOpen, onClose, fila, columna }) => {
             </button>
           </form>
         ) : (
-          <div>
+          <div >
             <h1>Costo Total: {timeDifference} bs</h1>
-            <h1>aqui va QR</h1>
+            <img src="https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSh-wrQu254qFaRcoYktJ5QmUhmuUedlbeMaQeaozAVD4lh4ICsGdBNubZ8UlMvWjKC" alt="Imagen QR" />
             <button className='btn btn-block' onClick={handleConfirm}>
               Confirmar
             </button>
@@ -181,12 +200,12 @@ const Modal = ({ isOpen, onClose, fila, columna }) => {
             >
               Estado
             </div>
-            <div
+            {/* <div
               className={pestañaActual === 'registrar' ? 'pestaña activa' : 'pestaña'}
               onClick={() => setPestañaActual('registrar')}
             >
               Registrar
-            </div>
+            </div> */}
             <div
               className={pestañaActual === 'reservar' ? 'pestaña activa' : 'pestaña'}
               onClick={() => setPestañaActual('reservar')}

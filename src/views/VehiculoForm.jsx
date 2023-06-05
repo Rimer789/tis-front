@@ -53,7 +53,7 @@ export default function VehiculoForm() {
         .post(`/create-vehiculo`, vehiculo)
         .then(() => {
           setNotification('Se ha anadio nuevo vehiculo');
-          navigate('/vehiculos');
+          navigate('/opcionesCliente');
         })
         .catch((err) => {
           const response = err.response;

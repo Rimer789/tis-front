@@ -29,11 +29,13 @@ export default function Vehiculos() {
   const getVehiculos = () => {
     setLoading(true);
     axiosClient
-      .get('/stli-vehiculo')
+      .get('/list-vehiculo')
       .then(({ data }) => {
         setLoading(false);
         console.log(data);
-        setVehiculos(data.data);
+        if (Array.isArray(data)) {
+          setVehiculos(data);
+        }
       })
       .catch(() => {
         setLoading(false);
@@ -67,24 +69,36 @@ export default function Vehiculos() {
               </tr>
             </tbody>
           }
-          {!loading && 
-            <tbody>
-              {vehiculos.map(vehiculo => (
-                <tr>
-                  <td>{vehiculo.id}</td>
-                  <td>{vehiculo.placa}</td>
-                  <td>{vehiculo.modelo}</td>
-                  <td>{vehiculo.marca}</td>
-                  <td>{vehiculo.color}</td>
-                  <td>
-                    <Link className='btn-edit' to={'/vehiculos/'+vehiculo.id}>Edit</Link>
-                    &nbsp;
-                    <button onClick={(ev) => onDelete(vehiculo)} className='btn-delete'>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          }
+          {!loading && vehiculos && vehiculos.length > 0 ? (
+  <tbody>
+    {vehiculos.map((vehiculo) => (
+      <tr key={vehiculo.id_vehiculo}>
+        <td>{vehiculo.id_vehiculo}</td>
+        <td>{vehiculo.placa}</td>
+        <td>{vehiculo.modelo}</td>
+        <td>{vehiculo.marca}</td>
+        <td>{vehiculo.color}</td>
+        <td>
+          <Link className="btn-edit" to={"/vehiculos/" + vehiculo.id_vehiculo}>
+            Edit
+          </Link>
+          &nbsp;
+          <button onClick={(ev) => onDelete(vehiculo)} className="btn-delete">
+            Delete
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+) : (
+  <tbody>
+    <tr>
+      <td colSpan={"6"} className="text-center">
+        {loading ? "Loading..." : "No hay vehículos"}
+      </td>
+    </tr>
+  </tbody>
+)}
         </table>
       </div>
     </div>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axiosClient from '../axios-client';
 import { useStateContext } from '../contexts/ContextProvider';
+//placa del auto 
+//id del espacio 
 
 const RegistroVehiculos = () => {
   const [vehiculos, setVehiculos] = useState([]);
@@ -86,8 +88,8 @@ const RegistroVehiculos = () => {
         <thead>
           <tr>
             <th>Placa</th>
-            <th>Hora de ingreso</th>
-            <th>Hora de salida</th>
+            <th>Fecha de ingreso</th>
+            <th>Fecha de salida</th>
             <th>Acciones</th>
           </tr>
         </thead>

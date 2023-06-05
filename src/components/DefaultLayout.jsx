@@ -72,7 +72,6 @@ export default function DefaultLayout() {
 
        
         <Link to="/precios">Precios</Link>
-        <Link to="/cuenta">Cuenta</Link>
       </aside>
 
       <div className="content">

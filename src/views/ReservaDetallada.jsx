@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import axiosClient from '../axios-client';
+import  '../styles/info/User.css'
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-datetime/css/react-datetime.css';
 import { useStateContext } from '../contexts/ContextProvider';
@@ -141,6 +142,7 @@ export default function ReservaDetallada() {
         ) : (
           <div>
             <h1>Costo total: {timeDifference} bs</h1>
+            <img src="https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSh-wrQu254qFaRcoYktJ5QmUhmuUedlbeMaQeaozAVD4lh4ICsGdBNubZ8UlMvWjKC" alt="Imagen QR" />
             <button className='btn btn-block' onClick={handleConfirm}>
               Confirmar
             </button>
