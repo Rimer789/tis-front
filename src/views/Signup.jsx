@@ -63,7 +63,6 @@ export default function Signup() {
             <input ref={emailRef} type='email' placeholder='Email' />
 
             <input ref={ciRef} placeholder='CI'/>
-            <input ref={celularRef} placeholder='Celular'/>
             <input ref={paternoRef} placeholder='Apellido paterno'/>
             <input ref={maternoRef} placeholder='Apellido materno'/>
             <input ref={fechaNacimientoRef} type='date' placeholder='FechaNacimiento'/>                    
