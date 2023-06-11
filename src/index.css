@@ -193,8 +193,11 @@ table > tbody > tr > td {
   }
   
   #defaultLayout aside.aside-guardia {
-    background-color: blue;
+    background-color: #000000; /* negro */
+    background-image: linear-gradient(to bottom, #000000, #0000FF, #ee0c0c); /* degradé entre negro, azul y rojo */
   }
+  
+  
 
 
 #defaultLayout aside > a {
@@ -204,6 +207,10 @@ table > tbody > tr > td {
     color: white;
     text-decoration: none;
     transition: all 0.2s;
+}
+
+#defaultLayout aside > a:focus {
+  background-color: rgb(23, 127, 175); /* Color de resaltado para la ruta activa */
 }
 
 #defaultLayout aside > a:hover {

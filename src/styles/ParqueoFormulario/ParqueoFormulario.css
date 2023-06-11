@@ -6,7 +6,7 @@
   
   .split-screen-left {
     flex: 4;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(130, 194, 194, 0.1); /* Color con transparencia */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +14,7 @@
   
   .split-screen-right {
     flex: 3;
-    background-color: rgba(41, 133, 185, 0.753);
+    background-color: rgba(130, 194, 194, 0.1); /* Color con transparencia */
     display: flex;
     flex-direction: column; /* Agregar dirección de columna */
   }
@@ -24,25 +24,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(60, 160, 160, 0.685);
+    background-color: rgba(130, 194, 194, 0.1); /* Color con transparencia */
   }
+  
   
   .split-screen-bottom {
     flex: 2; /* Ocupa dos terceras partes */
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(130, 194, 194, 0.1); /* Color con transparencia */
   }
   
-  .centered-top {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(51, 121, 153, 0.644);
-    width: 80%;
-    height: 80%;
-    border-radius: 20px;
-  }
 
   .centered-bot {
     display: flex;

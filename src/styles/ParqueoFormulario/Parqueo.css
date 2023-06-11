@@ -4,7 +4,8 @@
   align-items: center;
   justify-content: center;
   margin-top: 10px;
-  background-color: rgb(255, 255, 255);
+  background-color: #000000; /* negro */
+    background-image: linear-gradient(to bottom, #000000, #0000FF, #ee0c0c);
   margin-bottom: 10px;
 }
   
@@ -14,10 +15,11 @@
     grid-template-columns: repeat(13, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 5px;
-    width: 500px;
-    height: 350;
-    background-color: #ffffff;
-    border: 7px solid #ffffff;
+    width: auto;
+    height: auto;
+    background-color: #000000; /* negro */
+    background-image: linear-gradient(to bottom, #000000, #0000FF, #ee0c0c);
+    border: 7px solid #000000;
     padding: 2px;
   }
   .grillaBot {
@@ -25,10 +27,11 @@
     grid-template-columns: repeat(13, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 5px;
-    width: 500px;
-    height: 350;
-    background-color: #ffffff;
-    border: 7px solid #ffffff;
+    width: auto;
+    height: auto;
+    background-color: #000000; /* negro */
+    background-image: linear-gradient(to bottom, #000000, #0000FF, #ee0c0c );
+    border: 7px solid #000000;
     padding: 2px;
   }
 
@@ -44,8 +47,8 @@
     border: 1px solid #f1f1f1;
     transition: all 0.3s ease-in-out;
     border-radius: 5px;
-    height: 50px;
-    width: 35px;
+    height: 35px;
+    width: 30px;
   }
   
   .celda:hover {
@@ -56,9 +59,11 @@
   }
 
   .fila-titulo {
+    color: #ffffff;
     font-weight: bold;
     text-align: center;
-    background-color: #f1f1f1;
+    background-color: #29acdbb8;
+    
   }
 
 
@@ -68,11 +73,11 @@
   }
   
   .estado-libre {
-    background-color: rgb(91, 124, 151);
+    background-color:#6aa4b3;
     color:transparent
   }
   
   .estado-reservado {
-    background-color: yellow;
+    background-color: #13ff87;
     color:transparent
   }

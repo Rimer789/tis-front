@@ -10,6 +10,7 @@ export default function Signup() {
     const passwordConfirmationRef = useRef();
 
     const ciRef = useRef();
+    const celularRef = useRef();
     const paternoRef = useRef();
     const maternoRef = useRef();
     const fechaNacimientoRef = useRef();
@@ -20,11 +21,12 @@ export default function Signup() {
     const onSubmit = (e) => {
         e.preventDefault();
         const payload = {
+            celular: celularRef.current.value,
             name: nameRef.current.value, 
             email: emailRef.current.value,
             password: passwordRef.current.value,
             password_confirmation: passwordConfirmationRef.current.value,
-
+            rol:"cliente",
             ci: ciRef.current.value,
             apellido_paterno: paternoRef.current.value,
             apellido_materno: maternoRef.current.value,
@@ -61,6 +63,7 @@ export default function Signup() {
             <input ref={emailRef} type='email' placeholder='Email' />
 
             <input ref={ciRef} placeholder='CI'/>
+            <input ref={celularRef} placeholder='Celular'/>
             <input ref={paternoRef} placeholder='Apellido paterno'/>
             <input ref={maternoRef} placeholder='Apellido materno'/>
             <input ref={fechaNacimientoRef} type='date' placeholder='FechaNacimiento'/>                    

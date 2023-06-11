@@ -15,11 +15,12 @@ const RegistroVehiculos = () => {
   }, []);
 
   const getUsers = () => {
-    axiosClient.get('/users')
+    axiosClient.get('/getReservas')
       .then(({ data }) => {
         setUsers(data.data);
       });
   };
+console.log(users)
 
   const getIngresoSalida = () => {
     axiosClient.get('/IngresoSalida')
@@ -31,7 +32,7 @@ const RegistroVehiculos = () => {
   const agregarVehiculo = () => {
     const fechaActual = new Date().toLocaleDateString();
     const horaActual = new Date().toLocaleTimeString();
-    const usuarioSeleccionado = users.find(user => user.ci === selectedUser);
+    const usuarioSeleccionado = users.find(user => user.placa_vehivulo === selectedUser);
     const vehiculoYaRegistrado = vehiculos.some(vehiculo => vehiculo.placa === usuarioSeleccionado.ci && vehiculo.horaSalida === 'Ocupado');
     if (!vehiculoYaRegistrado) {
       if (usuarioSeleccionado) {
@@ -75,7 +76,7 @@ const RegistroVehiculos = () => {
         >
           <option value="">Seleccione un usuario</option>
           {users.map(user => (
-            <option key={user.ci} value={user.ci}>{user.ci}</option>
+            <option key={user.placa_vehivulo} value={user.ci_vehivulo}>{user.ci_vehivulo}</option>
           ))}
         </select>
       </div>

@@ -27,12 +27,11 @@ body {
 }
 
 body {
-	margin: 0;
-	background: linear-gradient(45deg, #49a09d, #5f2c82);
-	font-family: sans-serif;
-	font-weight: 100;
-}
-
+	background-image: url('../fondo2.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+  }
+  
 .container {
 	position: absolute;
 	top: 50%;
