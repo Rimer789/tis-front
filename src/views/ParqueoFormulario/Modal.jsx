@@ -223,7 +223,7 @@ const [celular, setCelular] = useState('');
         ) : (
           <div >
             <h1>Costo Total: {timeDifference} bs</h1>
-            <img src="https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSh-wrQu254qFaRcoYktJ5QmUhmuUedlbeMaQeaozAVD4lh4ICsGdBNubZ8UlMvWjKC" alt="Imagen QR" />
+            <img src="./pago.jpg" alt="Descripción de la imagen"  />
             <button className='btn btn-block' onClick={handleConfirm}>
               Confirmar
             </button>
