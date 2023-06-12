@@ -7,6 +7,7 @@ import axiosClient from '../../axios-client';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-datetime/css/react-datetime.css';
 import { format, differenceInMinutes } from 'date-fns';
+import image1 from "../../styles/pago.jpg"
 
 const Modal = ({ isOpen, onClose, fila, columna }) => {
   const [vehiculos, setVehiculos] = useState([]);
@@ -78,8 +79,8 @@ const [celular, setCelular] = useState('');
   };
 
   const calculateTimeDifference = () => {
-    const timeDifferenceInMinutes =  Math.round (differenceInMinutes(endDate, startDate)*0.2);
-    setTimeDifference(timeDifferenceInMinutes);
+    const timeDifferenceInMinutes =  Math.round  (differenceInMinutes(endDate, startDate)*100)/1000;
+    setTimeDifference(timeDifferenceInMinutes.toFixed(2));
   };
 
   const onSubmit = (e) => {
@@ -223,7 +224,7 @@ const [celular, setCelular] = useState('');
         ) : (
           <div >
             <h1>Costo Total: {timeDifference} bs</h1>
-            <img src="./pago.jpg" alt="Descripción de la imagen"  />
+            <img  src={image1} />
             <button className='btn btn-block' onClick={handleConfirm}>
               Confirmar
             </button>
