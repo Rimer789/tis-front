@@ -12,7 +12,7 @@ import VehiculoForm from "./views/VehiculoForm";
 import GuardiaForm from "./views/GuardiaForm";
 
 import ReservaSimple from "./views/ReservaSimple";
-import ReservaDetallada from "./views/ReservaDetallada";
+//import ReservaDetallada from "./views/ReservaDetallada";
 import Accesos from "./views/Accesos";
 import Reservas from "./views/Reservas";
 import Cobros from "./views/Cobros";
@@ -23,7 +23,7 @@ import Deudas from "./views/Deudas";
 import Precios from "./views/Precios";
 import Cuenta from "./views/Cuenta";
 import OpcionesAdministrador from "./views/OpcionesAdministrador";
-import OpcionesGuardia from "./views/OpcionesGuardia";
+//import OpcionesGuardia from "./views/OpcionesGuardia";
 import OpcionesCliente from "./views/OpcionesCliente";
 import Comunicados from "./views/Comunicados";
 import ParqueoFormulario from "./views/ParqueoFormulario";
@@ -47,19 +47,19 @@ const router = createBrowserRouter([
 
             {path: '/parqueo', element: <ParqueoFormulario/>},
             {path: '/reservaSimple', element: <ReservaSimple/>},
-            {path: '/reservaDetallada', element: <ReservaDetallada/>},
+           // {path: '/reservaDetallada', element: <ReservaDetallada/>},
             {path: '/accesos', element: <Accesos/>},
             {path: '/reservas', element: <Reservas/>},
-            {path: '/cobros', element: <Cobros/>},
-            {path: '/reportes', element: <Reportes/>},
-            {path: '/guardias', element: <Guardias/>},
+            //{path: '/cobros', element: <Cobros/>},
+           // {path: '/reportes', element: <Reportes/>},
+           // {path: '/guardias', element: <Guardias/>},
             {path: '/historial', element: <Historial/>},
-            {path: '/deudas', element: <Deudas/>},
+           // {path: '/deudas', element: <Deudas/>},
             {path: '/comunicados', element: <Comunicados/>},
             {path: '/precios', element: <Precios/>},
             {path: '/cuenta', element: <Cuenta/>},
             {path: '/opcionesAdministrador', element: <OpcionesAdministrador/>},
-            {path: '/opcionesGuardia', element: <OpcionesGuardia/>},
+          //  {path: '/opcionesGuardia', element: <OpcionesGuardia/>},
             {path: '/opcionesCliente', element: <OpcionesCliente/>},
 
         ]

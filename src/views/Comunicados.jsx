@@ -24,13 +24,24 @@ export default function Comunicados() {
 
   return (
     <div>
-      <h2>Comunicados</h2>
+  <h2>Comunicados</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Contenido</th>
+      </tr>
+    </thead>
+    <tbody>
       {comunicados.map((comunicado) => (
-        <div key={comunicado.id}>
-          <p>Fecha: {comunicado.fecha}</p>
-          <p>Contenido: {comunicado.mensaje}</p>
-        </div>
+        <tr key={comunicado.id}>
+          <td>{comunicado.fecha}</td>
+          <td>{comunicado.mensaje}</td>
+        </tr>
       ))}
-    </div>
+    </tbody>
+  </table>
+</div>
+
   );
 }

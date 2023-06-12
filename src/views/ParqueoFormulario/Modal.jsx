@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef} from 'react';
 import { useStateContext } from '../../contexts/ContextProvider';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../../styles/ParqueoFormulario/Modal.css';
 import DatePicker from 'react-datepicker';
 import axiosClient from '../../axios-client';
@@ -10,6 +11,7 @@ import { format, differenceInMinutes } from 'date-fns';
 import image1 from "../../styles/pago.jpg"
 
 const Modal = ({ isOpen, onClose, fila, columna }) => {
+  const navigate = useNavigate();
   const [vehiculos, setVehiculos] = useState([]);
   const { user, token, notification, setUser, setToken, setRol, rol } = useStateContext();
 
@@ -138,8 +140,15 @@ const [celular, setCelular] = useState('');
   };
 
   const handleConfirm = () => {
-    axiosClient.post('/reservarGuardia', payload);//reservar espacio de lado cliente
+
+    axiosClient.post('/reservar', payload);
     setIsConfirmed(false);
+    navigate('/parqueo');
+  };
+  const handleConfirmg = () => {
+    axiosClient.post('/reservarGuardia', payloadg);
+    setIsConfirmed(false);
+    navigate('/parqueo');
   };
 
 
@@ -343,8 +352,8 @@ const [celular, setCelular] = useState('');
       ) : (
         <div >
           <h1>Costo Total: {timeDifference} bs</h1>
-          <img src="https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSh-wrQu254qFaRcoYktJ5QmUhmuUedlbeMaQeaozAVD4lh4ICsGdBNubZ8UlMvWjKC" alt="Imagen QR" />
-          <button className='btn btn-block' onClick={handleConfirm}>
+          <img  src={image1} />
+          <button className='btn btn-block' onClick={handleConfirmg}>
             Confirmar
           </button>
           <br />
@@ -384,7 +393,7 @@ const [celular, setCelular] = useState('');
                 className={pestañaActual === 'reservar' ? 'pestaña activa' : 'pestaña'}
                 onClick={() => setPestañaActual('reservarg')}
               >
-                Reservar guardia 
+                Reservar 
               </div>
             )}
           </div>

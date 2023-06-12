@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axiosClient from '../axios-client';
 import { Link } from 'react-router-dom';
 import { useStateContext } from '../contexts/ContextProvider';
-import { sendSMS } from './smsService';
+
+import '../styles/info/User.css';
 
 
 export default function Users() {
@@ -86,16 +87,16 @@ export default function Users() {
                   <td>{u.celular}</td>
                   <td>
                     <Link className="btn-edit" to={`/usuarios/${u.id}`}>
-                      Edit
+                      Editar
                     </Link>
                     &nbsp;
                     <button onClick={(ev) => onDelete(u)} className="btn-delete">
-                      Delete
+                      eliminar
                     </button>
                     &nbsp;
                     {u.celular && (
                       <button onClick={() => sendWhatsAppMessage("+591"+u.celular)} className="btn-whatsapp">
-                        Send WhatsApp
+                        Enviar sms
                       </button>
                     )}
                   </td>

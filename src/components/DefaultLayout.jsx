@@ -47,17 +47,17 @@ export default function DefaultLayout() {
             <Link to="/opcionesAdministrador">Enviar Comunicados</Link>
             <Link to="/users">Clientes</Link>
             <Link to="/reservas">Ver Reservas</Link>
-            <Link to="/cobros">Cobros</Link>
-            <Link to="/reportes">Reportes</Link>
-            <Link to="/guardias">Guardias</Link>
+            {/* <Link to="/cobros">Cobros</Link> */}
+            {/* <Link to="/reportes">Reportes</Link> */}
+            {/* <Link to="/guardias">Guardias</Link> */}
           </>
         )}
 
         {rol.rol === 'guardia' && (
           <>
-            <Link to="/opcionesGuardia">Opciones Guardia</Link>
+            {/* <Link to="/opcionesGuardia">Opciones Guardia</Link> */}
             <Link to="/accesos">Accesos</Link>
-            <Link to="/reservaDetallada">Reserva Detallada</Link>
+            {/* <Link to="/reservaDetallada">Reserva Detallada</Link> */}
           </>
         )}
 
@@ -65,7 +65,7 @@ export default function DefaultLayout() {
           <>
             <Link to="/opcionesCliente">Mis Vehiculos</Link>
             <Link to="/historial">Historial</Link>
-            <Link to="/deudas">Deudas</Link>
+            {/* <Link to="/deudas">Deudas</Link> */}
             <Link to="/comunicados">Comunicados</Link>
           </>
         )}
