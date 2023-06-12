@@ -11,6 +11,7 @@ export default function Login() {
     const passwordRef = useRef();
     const { setUser, setToken } = useStateContext()
     const [errors, setErrors] = useState(null);
+    
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -61,7 +62,7 @@ export default function Login() {
                             <div class="input_box">
                                 <input ref={passwordRef} type='password' placeholder='Password' />
                                 <span className="material-icons password">lock</span>
-                                <span className="material-icons visibility_off">visibility_off</span>
+                                {/* <span id="toggleVisibility" className="material-icons visibility_off">visibility_off</span> */}
                             </div>
                             <button className='btn btn-block'>Iniciar Sesión</button>
                             <p className='message'>

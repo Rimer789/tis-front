@@ -50,9 +50,9 @@ export default function Users() {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1>Users</h1>
+        <h1>Clientes</h1>
         <Link to="/users/new" className="btn-add">
-          Add new
+          Agregar
         </Link>
       </div>
       <div className="card animated fadeInDown">
@@ -60,11 +60,11 @@ export default function Users() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Name</th>
+              <th>Nombre</th>
               <th>Email</th>
-              <th>Create Date</th>
+              <th>Fecha de creación</th>
               <th>Apellido Materno</th>
-              <th>Numero</th>
+              <th>Número</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -86,16 +86,16 @@ export default function Users() {
                   <td>{u.celular}</td>
                   <td>
                     <Link className="btn-edit" to={`/usuarios/${u.id}`}>
-                      Edit
+                      Editar
                     </Link>
                     &nbsp;
                     <button onClick={(ev) => onDelete(u)} className="btn-delete">
-                      Delete
+                      Borrar
                     </button>
                     &nbsp;
                     {u.celular && (
                       <button onClick={() => sendWhatsAppMessage("+591"+u.celular)} className="btn-whatsapp">
-                        Send WhatsApp
+                        Enviar WhatsApp
                       </button>
                     )}
                   </td>

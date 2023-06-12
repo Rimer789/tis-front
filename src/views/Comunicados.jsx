@@ -24,11 +24,11 @@ export default function Comunicados() {
 
   return (
     <div>
-      <h2>Comunicados</h2>
+      <h2 class="TComunicados">Comunicados</h2>
       {comunicados.map((comunicado) => (
         <div key={comunicado.id}>
-          <p>Fecha: {comunicado.fecha}</p>
-          <p>Contenido: {comunicado.mensaje}</p>
+          <p class="comunicado">Fecha: {comunicado.fecha}</p>
+          <p class="comunicado">Contenido: {comunicado.mensaje}</p>
         </div>
       ))}
     </div>
