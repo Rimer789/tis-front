@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axiosClient from '../axios-client';
 import { Link } from 'react-router-dom';
 import { useStateContext } from '../contexts/ContextProvider';
-import { sendSMS } from './smsService';
+
+import '../styles/info/User.css';
 
 
 export default function Users() {

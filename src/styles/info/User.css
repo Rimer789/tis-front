@@ -98,3 +98,56 @@ tbody {
 		}
 	}
 }
+
+.titulo {
+	font-size: 24px;
+	color: #333;
+	align-items: center;
+	align-content: center;
+	margin-left: 40%;
+	/* Agrega cualquier otro estilo adicional para el título */
+  }
+  
+  .boton {
+	background-color: #fa2500;
+	color: #fff;
+	padding: 8px 16px;
+	border: none;
+	cursor: pointer;
+	margin-left: 45%;
+	/* Agrega cualquier otro estilo adicional para el botón */
+  }
+  
+  .boton-confirmado {
+	background-color: rgb(2, 253, 2);
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	cursor: pointer;
+	margin-left: 45%;
+	/* Agrega cualquier otro estilo adicional para el botón confirmado */
+  }
+  
+  .btn-whatsapp {
+	display: inline-block;
+	background-color: #25D366;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	padding: 10px 15px;
+	border-radius: 5px;
+	border: none;
+	font-weight: bold;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s ease;
+  }
+  
+  .btn-whatsapp:hover {
+	background-color: #128C7E;
+  }
+  
+  .btn-whatsapp i {
+	margin-right: 5px;
+  }
+  
+  

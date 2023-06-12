@@ -1,14 +1,17 @@
 
 import React, { useState, useEffect, useRef} from 'react';
 import { useStateContext } from '../../contexts/ContextProvider';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../../styles/ParqueoFormulario/Modal.css';
 import DatePicker from 'react-datepicker';
 import axiosClient from '../../axios-client';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-datetime/css/react-datetime.css';
 import { format, differenceInMinutes } from 'date-fns';
+import image1 from "../../styles/pago.jpg"
 
 const Modal = ({ isOpen, onClose, fila, columna }) => {
+  const navigate = useNavigate();
   const [vehiculos, setVehiculos] = useState([]);
   const { user, token, notification, setUser, setToken, setRol, rol } = useStateContext();
 
@@ -78,8 +81,8 @@ const [celular, setCelular] = useState('');
   };
 
   const calculateTimeDifference = () => {
-    const timeDifferenceInMinutes =  Math.round (differenceInMinutes(endDate, startDate)*0.2);
-    setTimeDifference(timeDifferenceInMinutes);
+    const timeDifferenceInMinutes =  Math.round  (differenceInMinutes(endDate, startDate)*100)/1000;
+    setTimeDifference(timeDifferenceInMinutes.toFixed(2));
   };
 
   const onSubmit = (e) => {
@@ -119,15 +122,13 @@ const [celular, setCelular] = useState('');
       modelo: modelo,
       marca: marca,
       color: color,
-      apellido_materno: am,
-      apellido_paterno:ap,
-      name:nombre,
+      apellidos:ap,
+      nombres:nombre,
       ci:ci,
       celular:celular,
       espacio: `${fila + columna}`,
       tiempoIni: formattedStartDate,
       tiempoFin: formattedEndDate,
-      estado:'ocupado',
       
     };
 
@@ -139,8 +140,15 @@ const [celular, setCelular] = useState('');
   };
 
   const handleConfirm = () => {
-    axiosClient.post('/reservar', payload);//reservar espacio de lado cliente
+
+    axiosClient.post('/reservar', payload);
     setIsConfirmed(false);
+    navigate('/parqueo');
+  };
+  const handleConfirmg = () => {
+    axiosClient.post('/reservarGuardia', payloadg);
+    setIsConfirmed(false);
+    navigate('/parqueo');
   };
 
 
@@ -223,7 +231,7 @@ const [celular, setCelular] = useState('');
         ) : (
           <div >
             <h1>Costo Total: {timeDifference} bs</h1>
-            <img src="https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSh-wrQu254qFaRcoYktJ5QmUhmuUedlbeMaQeaozAVD4lh4ICsGdBNubZ8UlMvWjKC" alt="Imagen QR" />
+            <img  src={image1} />
             <button className='btn btn-block' onClick={handleConfirm}>
               Confirmar
             </button>
@@ -257,21 +265,14 @@ const [celular, setCelular] = useState('');
             onChange={(e) => setCi(e.target.value)}
           />
           <div>
-          <label>Apellido paterno:</label>
+          <label>Apellidos:</label>
           <input
             type='text'
             value={ap}
             onChange={(e) => setAp(e.target.value)}
           />
         </div>
-        <div>
-          <label>apellido materno:</label>
-          <input
-            type='text'
-            value={am}
-            onChange={(e) => setAm(e.target.value)}
-          />
-        </div>
+        
         <div>
           <label>celular:</label>
           <input
@@ -351,8 +352,8 @@ const [celular, setCelular] = useState('');
       ) : (
         <div >
           <h1>Costo Total: {timeDifference} bs</h1>
-          <img src="https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSh-wrQu254qFaRcoYktJ5QmUhmuUedlbeMaQeaozAVD4lh4ICsGdBNubZ8UlMvWjKC" alt="Imagen QR" />
-          <button className='btn btn-block' onClick={handleConfirm}>
+          <img  src={image1} />
+          <button className='btn btn-block' onClick={handleConfirmg}>
             Confirmar
           </button>
           <br />
@@ -392,7 +393,7 @@ const [celular, setCelular] = useState('');
                 className={pestañaActual === 'reservar' ? 'pestaña activa' : 'pestaña'}
                 onClick={() => setPestañaActual('reservarg')}
               >
-                Reservar guardia 
+                Reservar 
               </div>
             )}
           </div>

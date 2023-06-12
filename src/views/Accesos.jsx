@@ -1,118 +1,108 @@
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 import axiosClient from '../axios-client';
-import { useStateContext } from '../contexts/ContextProvider';
-//placa del auto 
-//id del espacio 
 
-const RegistroVehiculos = () => {
-  const [vehiculos, setVehiculos] = useState([]);
-  const [selectedUser, setSelectedUser] = useState('');
-  const [users, setUsers] = useState([]);
+export default function Reservas() {
+  const [reservas, setReservas] = useState([]);
+  const [placaVehiculo, setPlacaVehiculo] = useState('');
+  const [horaIngreso, setHoraIngreso] = useState('');
+  const [registrosIngreso, setRegistrosIngreso] = useState([]);
 
   useEffect(() => {
-    getUsers();
-    getIngresoSalida();
+    obtenerReservas();
   }, []);
 
-  const getUsers = () => {
-    axiosClient.get('/getReservas')
-      .then(({ data }) => {
-        setUsers(data.data);
-      });
-  };
-console.log(users)
-
-  const getIngresoSalida = () => {
-    axiosClient.get('/IngresoSalida')
-      .then(({ data }) => {
-        setVehiculos(data.data);
-      });
-  };
-
-  const agregarVehiculo = () => {
-    const fechaActual = new Date().toLocaleDateString();
-    const horaActual = new Date().toLocaleTimeString();
-    const usuarioSeleccionado = users.find(user => user.placa_vehivulo === selectedUser);
-    const vehiculoYaRegistrado = vehiculos.some(vehiculo => vehiculo.placa === usuarioSeleccionado.ci && vehiculo.horaSalida === 'Ocupado');
-    if (!vehiculoYaRegistrado) {
-      if (usuarioSeleccionado) {
-        const nuevoVehiculo = {
-          placa: usuarioSeleccionado.ci,
-          horaIngreso: `${fechaActual} ${horaActual}`,
-          horaSalida: 'Ocupado',
-        };
-        axiosClient.post('/IngresoSalida', nuevoVehiculo)
-          .then(() => {
-            setVehiculos([...vehiculos, nuevoVehiculo]);
-          });
-      }
-    } else {
-      alert('Ya se ha registrado el ingreso de este vehículo.');
-    }
-    setSelectedUser('');
-  };
-
-  const registrarSalida = (index) => {
-    const fechaActual = new Date().toLocaleDateString();
-    const horaSalidaActual = new Date().toLocaleTimeString();
-    const vehiculosActualizados = [...vehiculos];
-    if (vehiculosActualizados[index].horaSalida !== 'Ocupado') {
-      vehiculosActualizados[index].horaSalida = `${fechaActual} ${horaSalidaActual}`;
-      axiosClient.post('/IngresoSalida', vehiculosActualizados[index])
-        .then(() => {
-          setVehiculos(vehiculosActualizados);
+  const obtenerReservas = () => {
+    axiosClient
+      .get('/getReservas')
+      .then((response) => {
+        const reservasOrdenadas = response.data.sort((a, b) => {
+          return new Date(a.fecha) - new Date(b.fecha);
         });
+        setReservas(reservasOrdenadas);
+      })
+      .catch((error) => {
+        console.error('Error al obtener las reservas:', error);
+      });
+  };
+
+  const handlePlacaVehiculoChange = (event) => {
+    setPlacaVehiculo(event.target.value);
+  };
+
+  const handleHoraIngresoChange = (event) => {
+    setHoraIngreso(event.target.value);
+  };
+
+  const enviarDatos = () => {
+    const reservaSeleccionada = reservas.find(
+      (reserva) => reserva.vehiculo === placaVehiculo
+    );
+
+    if (reservaSeleccionada) {
+      const nuevoRegistro = {
+        placaVehiculo,
+        fecha: moment().format('YYYY-MM-DD'),
+        horaIngreso: moment().format('HH:mm:ss'),
+        espacio: reservaSeleccionada.espacio,
+      };
+
+      setRegistrosIngreso([...registrosIngreso, nuevoRegistro]);
     }
+    const comunicado = {
+      espacio:reservaSeleccionada.espacio,
+    };
+    axiosClient
+    .post('/ingreso', comunicado)
   };
 
   return (
     <div>
-      <h1>Registro de Ingreso y Salida de Vehículos</h1>
-      <div>
-        <label>Usuario:</label>
-        <select
-          value={selectedUser}
-          onChange={(e) => setSelectedUser(e.target.value)}
-        >
-          <option value="">Seleccione un usuario</option>
-          {users.map(user => (
-            <option key={user.placa_vehivulo} value={user.ci_vehivulo}>{user.ci_vehivulo}</option>
-          ))}
-        </select>
-      </div>
-      <button onClick={agregarVehiculo} disabled={selectedUser === ''}>
-        Registrar ingreso
-      </button>
+      <h2>Ingreso Salida</h2>
+      <label htmlFor="placa_vehiculo">Placa de vehículo:</label>
+      <select
+        id="placa_vehiculo"
+        value={placaVehiculo}
+        onChange={handlePlacaVehiculoChange}
+      >
+        <option value="">Seleccionar placa de vehículo</option>
+        {reservas.map((reserva) => (
+          <option key={reserva.id} value={reserva.vehiculo}>
+            {reserva.vehiculo}
+          </option>
+        ))}
+      </select>
+      <br />
+      <label htmlFor="hora_ingreso">Hora de ingreso:</label>
+      <input
+        type="text"
+        id="hora_ingreso"
+        value={horaIngreso}
+        onChange={handleHoraIngresoChange}
+      />
+      <br />
+      <button onClick={enviarDatos}>Enviar</button>
 
-      <h2>Vehículos registrados:</h2>
       <table>
         <thead>
           <tr>
-            <th>Placa</th>
-            <th>Fecha de ingreso</th>
-            <th>Fecha de salida</th>
-            <th>Acciones</th>
+            <th>Placa del vehículo</th>
+            <th>Fecha</th>
+            <th>Hora de ingreso</th>
+            <th>Espacio</th>
           </tr>
         </thead>
         <tbody>
-          {vehiculos.map((vehiculo, index) => (
+          {registrosIngreso.map((registro, index) => (
             <tr key={index}>
-              <td>{vehiculo.placa}</td>
-              <td>{vehiculo.horaIngreso}</td>
-              <td>{vehiculo.horaSalida}</td>
-              <td>
-                {vehiculo.horaSalida === 'Ocupado' ? (
-                  <button onClick={() => registrarSalida(index)}>
-                    Registrar salida
-                  </button>
-                ) : null}
-              </td>
+              <td>{registro.placaVehiculo}</td>
+              <td>{registro.fecha}</td>
+              <td>{registro.horaIngreso}</td>
+              <td>{registro.espacio}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
-};
-
-export default RegistroVehiculos;
+}
