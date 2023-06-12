@@ -1,6 +1,7 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
+import Pago from './views/pago'
 import Users from "./views/Users";
 import NotFound from "./views/NotFound";
 import DefaultLayout from "./components/DefaultLayout";
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <Signup />
+            },
+            {
+                path: '/pago',
+                element: <Pago />
             },
         ]
     },

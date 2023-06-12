@@ -13,7 +13,6 @@ export default function EnviarComunicado() {
     event.preventDefault();
     const comunicado = {
       mensaje: comunicadoRef.current.value,
-      //fecha: new Date().toISOString().split('T')[0],
       para: 0
     };
     console.log(comunicado)

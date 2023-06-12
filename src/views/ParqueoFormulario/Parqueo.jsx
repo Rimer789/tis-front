@@ -132,10 +132,10 @@ const Parqueo = ({ onParqueoClick }) => {
       />
        {isAdmin1 && (
       <div>
-      <div className="botones">
-        <button onClick={habilitar}>Agregar Espacio</button> <br />
+      <div >
+        <button className='button' onClick={habilitar}>Agregar Espacio</button> <br />
         <br/>
-        <button onClick={eliminar}>Eliminar Espacio</button>
+        <button className='button' onClick={eliminar}>Eliminar Espacio</button>
       </div>
       
       <div className="selectores">
