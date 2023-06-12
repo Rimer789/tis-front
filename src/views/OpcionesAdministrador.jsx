@@ -12,12 +12,13 @@ export default function EnviarComunicado() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const comunicado = {
-      contenido: comunicadoRef.current.value,
-      fecha: new Date().toISOString().split('T')[0],
+      mensaje: comunicadoRef.current.value,
+      //fecha: new Date().toISOString().split('T')[0],
+      para: 0
     };
     console.log(comunicado)
     axiosClient
-      .post('/enviarComunicado', comunicado)
+      .post('/enviarAnuncio', comunicado)
       .then(() => {
         setNotification('Comunicado enviado correctamente');
         navigate('/opcionesAdministrador');

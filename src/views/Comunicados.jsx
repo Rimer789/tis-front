@@ -10,7 +10,7 @@ export default function Comunicados() {
 
   const obtenerComunicados = () => {
     axiosClient
-      .get('/enviarcomunicados')
+      .get('/verAnuncios')
       .then((response) => {
         const comunicadosOrdenados = response.data.sort((a, b) => {
           return new Date(a.fecha) - new Date(b.fecha);
@@ -28,7 +28,7 @@ export default function Comunicados() {
       {comunicados.map((comunicado) => (
         <div key={comunicado.id}>
           <p>Fecha: {comunicado.fecha}</p>
-          <p>Contenido: {comunicado.contenido}</p>
+          <p>Contenido: {comunicado.mensaje}</p>
         </div>
       ))}
     </div>

@@ -13,6 +13,7 @@ export default function UserForm() {
   const [user, setUser] = useState({
     id: null,
     name: '',
+    celular:'',
     email: '',
     password: '',
     password_confirmation: ''
@@ -22,7 +23,7 @@ export default function UserForm() {
     if (id) {
       setLoading(true);
       axiosClient
-        .get(`/users/${id}`)
+        .get(`/usuarios/${id}`)
         .then(({ data }) => {
           setLoading(false);
           setUser(data);
@@ -37,7 +38,7 @@ export default function UserForm() {
     ev.preventDefault();
     if (user.id) {
       axiosClient
-        .put(`/users/${user.id}`, user)
+        .put(`/usuarios/${user.id}`, user)
         .then(() => {
           //todo show notification
           setNotification('Se ha modificado el usuario');
@@ -52,7 +53,7 @@ export default function UserForm() {
         });
     } else {
       axiosClient
-        .post(`/users`, user)
+        .post(`/usuarios`, user)
         .then(() => {
           setNotification('Se ha creado el usuario');
           navigate('/users');
@@ -93,6 +94,12 @@ export default function UserForm() {
               value={user.email}
               onChange={(ev) => setUser({ ...user, email: ev.target.value })}
               placeholder="Email"
+            />
+            <input
+              type="text"
+              value={user.celular}
+              onChange={(ev) => setUser({ ...user, celular: ev.target.value })}
+              placeholder="celular"
             />
             <input
               type="password"
