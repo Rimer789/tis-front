@@ -120,15 +120,13 @@ const [celular, setCelular] = useState('');
       modelo: modelo,
       marca: marca,
       color: color,
-      apellido_materno: am,
-      apellido_paterno:ap,
-      name:nombre,
+      apellidos:ap,
+      nombres:nombre,
       ci:ci,
       celular:celular,
       espacio: `${fila + columna}`,
       tiempoIni: formattedStartDate,
       tiempoFin: formattedEndDate,
-      estado:'ocupado',
       
     };
 
@@ -140,7 +138,7 @@ const [celular, setCelular] = useState('');
   };
 
   const handleConfirm = () => {
-    axiosClient.post('/reservar', payload);//reservar espacio de lado cliente
+    axiosClient.post('/reservarGuardia', payload);//reservar espacio de lado cliente
     setIsConfirmed(false);
   };
 
@@ -258,21 +256,14 @@ const [celular, setCelular] = useState('');
             onChange={(e) => setCi(e.target.value)}
           />
           <div>
-          <label>Apellido paterno:</label>
+          <label>Apellidos:</label>
           <input
             type='text'
             value={ap}
             onChange={(e) => setAp(e.target.value)}
           />
         </div>
-        <div>
-          <label>apellido materno:</label>
-          <input
-            type='text'
-            value={am}
-            onChange={(e) => setAm(e.target.value)}
-          />
-        </div>
+        
         <div>
           <label>celular:</label>
           <input
