@@ -43,8 +43,8 @@ export default function Guardias() {
   return (
     <div>
       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-        <h1>guardias</h1>
-        <Link to={'/guardias/new'} className="btn-add">Add new</Link>
+        <h1>Guardias</h1>
+        <Link to={'/guardias/new'} className="btn-add">Agregar nuevo</Link>
       </div>
       <div className='card animated fadeInDown'>
         <table>

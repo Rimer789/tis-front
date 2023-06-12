@@ -49,33 +49,57 @@ export default function Signup() {
 
   return (
     <div className='login-signup-form animated fadeInDown'>
-    <div className='form'>
-        <form onSubmit={onSubmit}>
-            <h1 className='title'>
-                Registrarse
-            </h1>
-            {errors && <div className="alert">
-                {Object.keys(errors).map(key => (
-                    <p key={key}>{errors[key][0]}</p>
-                ))}
-                </div>}
-            <input ref={nameRef} placeholder='Nombre Completo' />
-            <input ref={emailRef} type='email' placeholder='Email' />
-
-            <input ref={ciRef} placeholder='CI'/>
-            <input ref={celularRef} placeholder='Celular'/>
-            <input ref={paternoRef} placeholder='Apellido paterno'/>
-            <input ref={maternoRef} placeholder='Apellido materno'/>
-            <input ref={fechaNacimientoRef} type='date' placeholder='FechaNacimiento'/>                    
-
-            <input ref={passwordRef} type='password' placeholder='Password'/>
-            <input ref={passwordConfirmationRef} type='password' placeholder='Password confirmation'/>
-            <button className='btn btn-block'>Registrarse</button>
-            <p className='message'>
-                ¿Ya estas registrado? <Link to="/login">Inicia Sesión</Link>
-            </p>
-        </form>
+        <section className="fondo_signup">
+            <div className='form_containerR'>
+                <Link to={'/'} className="material-icons form_close">close</Link>
+                <div class="form_imputs">
+                    <form onSubmit={onSubmit}>
+                        <h1 className='title'>
+                            Registrarse
+                        </h1>
+                        {errors && <div className="alert">
+                            {Object.keys(errors).map(key => (
+                                <p key={key}>{errors[key][0]}</p>
+                            ))}
+                            </div>}
+                        <div class="input_boxR">
+                            <input ref={nameRef} placeholder='Nombres' />
+                            <span className="material-icons person">person</span>
+                        </div>
+                        <div class="input_doble">
+                            <input class="input_field" ref={paternoRef} placeholder='Apellido paterno'/>
+                            <span className="material-icons persona">person</span>
+                            <input class="input_field" ref={maternoRef} placeholder='Apellido materno'/>
+                            <span className="material-icons persona1">person</span>
+                        </div>
+                        <div class="input_doble">
+                            <input class="input_field" ref={ciRef} placeholder='CI'/>
+                            <span className="material-icons">badge</span>
+                            <input class="input_field custom-date-input" ref={fechaNacimientoRef} type='date' placeholder='FechaNacimiento'/>
+                        </div>
+                        <div class="input_boxR">
+                            <input ref={emailRef} type='email' placeholder='Email' />
+                            <span className="material-icons email">mail</span> 
+                        </div>
+                        <div class="input_boxR">
+                            <input ref={passwordRef} type='password' placeholder='Password'/>
+                            <span className="material-icons password">lock</span>
+                            {/* <span className="material-icons visibility_off">visibility_off</span> */}
+                        </div>
+                        <div class="input_boxR">
+                            <input ref={passwordConfirmationRef} type='password' placeholder='Password confirmation'/>
+                            <span className="material-icons password">lock</span>
+                            {/* <span className="material-icons visibility_off">visibility_off</span> */}
+                        </div>                                           
+                        <button className='btn btn-block'>Registrarse</button>
+                        <p className='message'>
+                            ¿Ya estas registrado? <Link to="/login">Inicia Sesión</Link>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
     </div>
-</div>
+
   )
 }

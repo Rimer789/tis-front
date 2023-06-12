@@ -71,8 +71,8 @@ export default function GuardiaForm() {
   return (
     <>
       {guardia.id && <h1>Update guardia: {guardia.name}</h1>}
-      {!guardia.id && <h1>New guardia</h1>}
-      <div className="card animated fadeInDown">
+      {!guardia.id && <h1>Nuevo guardia</h1>}
+      <div>
         {loading && <div className="text-centered">Cargando...</div>}
         {errors && (
           <div className="alert">
@@ -82,35 +82,47 @@ export default function GuardiaForm() {
           </div>
         )}
 
-        {!loading && (
-          <form onSubmit={onSubmit}>
-            <input
-              value={guardia.name}
-              onChange={(ev) => setGuardia({ ...guardia, name: ev.target.value })}
-              placeholder="Name"
-            />
-            <input
-              type="email"
-              value={guardia.email}
-              onChange={(ev) => setGuardia({ ...guardia, email: ev.target.value })}
-              placeholder="Email"
-            />
-            <input
-              type="password"
-              onChange={(ev) => setGuardia({ ...guardia, password: ev.target.value })}
-              placeholder="Password"
-            />
-            <input
-              type="password"
-              onChange={(ev) =>
-                setGuardia({ ...guardia, password_confirmation: ev.target.value })
-              }
-              placeholder="Password Confirmation"
-            />
-            <button className="btn-add">Save</button>
-            <Link to={'/guardias'} className="btn-add">Atras</Link>
-          </form>
-        )}
+        <div className='formGuardia'>
+          <div class="formImputsG">
+            {!loading && (
+              <form onSubmit={onSubmit}>
+                <div class="inputGuardia">
+                  <input
+                    value={guardia.name}
+                    onChange={(ev) => setGuardia({ ...guardia, name: ev.target.value })}
+                    placeholder="Nombre"
+                  />
+                </div>
+                <div class="inputGuardia">
+                  <input
+                    type="email"
+                    value={guardia.email}
+                    onChange={(ev) => setGuardia({ ...guardia, email: ev.target.value })}
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="inputGuardia">
+                  <input
+                    type="password"
+                    onChange={(ev) => setGuardia({ ...guardia, password: ev.target.value })}
+                    placeholder="Contraseña"
+                  />
+                </div>
+                <div class="inputGuardia">
+                  <input
+                    type="password"
+                    onChange={(ev) =>
+                      setGuardia({ ...guardia, password_confirmation: ev.target.value })
+                    }
+                    placeholder="Confirmar contraseña"
+                  />
+                </div>
+                <button className="btn-save">Guardar</button>
+                <Link to={'/guardias'} className="btn-back">Atrás</Link>
+              </form>
+            )}
+          </div>
+        </div>
       </div>
     </>
   );

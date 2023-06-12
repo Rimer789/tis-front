@@ -71,8 +71,8 @@ export default function UserForm() {
   return (
     <>
       {user.id && <h1>Update User: {user.name}</h1>}
-      {!user.id && <h1>New user</h1>}
-      <div className="card animated fadeInDown">
+      {!user.id && <h1>Nuevo usuario</h1>}
+      <div>
         {loading && <div className="text-centered">Cargando...</div>}
         {errors && (
           <div className="alert">
@@ -82,40 +82,55 @@ export default function UserForm() {
           </div>
         )}
 
-        {!loading && (
-          <form onSubmit={onSubmit}>
-            <input
-              value={user.name}
-              onChange={(ev) => setUser({ ...user, name: ev.target.value })}
-              placeholder="Name"
-            />
-            <input
-              type="email"
-              value={user.email}
-              onChange={(ev) => setUser({ ...user, email: ev.target.value })}
-              placeholder="Email"
-            />
-            <input
-              type="text"
-              value={user.celular}
-              onChange={(ev) => setUser({ ...user, celular: ev.target.value })}
-              placeholder="celular"
-            />
-            <input
-              type="password"
-              onChange={(ev) => setUser({ ...user, password: ev.target.value })}
-              placeholder="Password"
-            />
-            <input
-              type="password"
-              onChange={(ev) =>
-                setUser({ ...user, password_confirmation: ev.target.value })
-              }
-              placeholder="Password Confirmation"
-            />
-            <button className="btn">Save</button>
-          </form>
-        )}
+        <div class="formUser">
+          <div class="formInputU">
+            {!loading && (
+              <form onSubmit={onSubmit}>
+                <div class="inputUser">
+                  <input
+                    value={user.name}
+                    onChange={(ev) => setUser({ ...user, name: ev.target.value })}
+                    placeholder="Nombre"
+                  />
+                </div>
+                <div class="inputUser">
+                  <input
+                    type="email"
+                    value={user.email}
+                    onChange={(ev) => setUser({ ...user, email: ev.target.value })}
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="inputUser">
+                  <input
+                    type="text"
+                    value={user.celular}
+                    onChange={(ev) => setUser({ ...user, celular: ev.target.value })}
+                    placeholder="Celular"
+                  />
+                </div>
+                <div class="inputUser">
+                  <input
+                    type="password"
+                    onChange={(ev) => setUser({ ...user, password: ev.target.value })}
+                    placeholder="Contraseña"
+                  />
+                </div>
+                <div class="inputUser">
+                  <input
+                    type="password"
+                    onChange={(ev) =>
+                      setUser({ ...user, password_confirmation: ev.target.value })
+                    }
+                    placeholder="Confirmar contraseña"
+                  />
+                </div>
+                <button className="btn_User">Guardar</button>
+                
+              </form>
+            )}
+          </div>
+        </div>
       </div>
     </>
   );
