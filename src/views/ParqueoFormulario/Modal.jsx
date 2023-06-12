@@ -186,12 +186,12 @@ const [celular, setCelular] = useState('');
 
            
             <div>
-        <label>Usuario:</label>
+        <label>vehiculo:</label>
         <select
           value={selectedUser}
           onChange={(e) => setSelectedUser(e.target.value)}
         >
-          <option value="">Seleccione un usuario</option>
+          <option value="">Seleccione vehiculo</option>
           {vehiculos.map(vehiculo => (
             <option key={vehiculo.placa} value={vehiculo.placa}>{vehiculo.placa}</option>
           ))}
