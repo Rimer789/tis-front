@@ -182,7 +182,7 @@ const [celular, setCelular] = useState('');
         <div className='form'>
         {!isConfirmed ? (
           <form onSubmit={onSubmit}>
-            <h1 className='title'>Registrar</h1>
+            <h1 className='title'>Reservar</h1>
 
            
             <div>

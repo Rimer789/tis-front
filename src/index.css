@@ -525,6 +525,7 @@ a{
     width: 240px;
     background-color: #110ecea7;
     padding: 1rem
+    
 }
 
 #defaultLayout aside.aside-administrador {
@@ -546,6 +547,8 @@ a{
     color: white;
     text-decoration: none;
     transition: all 0.2s;
+    background: black;
+    margin-top: 10px;
 }
 
 #defaultLayout aside > a:focus {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axiosClient from '../axios-client';
+import '../styles/info/anuncio.css';
 
 export default function Comunicados() {
   const [comunicados, setComunicados] = useState([]);
@@ -12,8 +13,15 @@ export default function Comunicados() {
     axiosClient
       .get('/verAnuncios')
       .then((response) => {
-        const comunicadosOrdenados = response.data.sort((a, b) => {
-          return new Date(a.fecha) - new Date(b.fecha);
+        const fechaActual = new Date();
+        const fechaLimite = new Date();
+        fechaLimite.setDate(fechaLimite.getDate() - 2); // Restar 2 días
+        const comunicadosFiltrados = response.data.filter((comunicado) => {
+          const fechaComunicado = new Date(comunicado.fecha);
+          return fechaComunicado >= fechaLimite && fechaComunicado <= fechaActual;
+        });
+        const comunicadosOrdenados = comunicadosFiltrados.sort((a, b) => {
+          return new Date(b.fecha) - new Date(a.fecha);
         });
         setComunicados(comunicadosOrdenados);
       })
@@ -24,24 +32,15 @@ export default function Comunicados() {
 
   return (
     <div>
-  <h2>Comunicados</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Fecha</th>
-        <th>Contenido</th>
-      </tr>
-    </thead>
-    <tbody>
-      {comunicados.map((comunicado) => (
-        <tr key={comunicado.id}>
-          <td>{comunicado.fecha}</td>
-          <td>{comunicado.mensaje}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
+      <h2>Comunicados</h2>
+      <div className="card-container">
+        {comunicados.map((comunicado) => (
+          <div key={comunicado.id} className="card">
+            <div className="card-header">{comunicado.fecha}</div>
+            <div className="card-body">{comunicado.mensaje}</div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

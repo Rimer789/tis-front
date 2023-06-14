@@ -78,6 +78,10 @@ export default function Signup() {
                             <input class="input_field custom-date-input" ref={fechaNacimientoRef} type='date' placeholder='FechaNacimiento'/>
                         </div>
                         <div class="input_boxR">
+                            <input ref={celularRef}  placeholder='celular' />
+                            <span className="material-icons email">celular</span> 
+                        </div>
+                        <div class="input_boxR">
                             <input ref={emailRef} type='email' placeholder='Email' />
                             <span className="material-icons email">mail</span> 
                         </div>

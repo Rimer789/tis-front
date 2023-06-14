@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axiosClient from '../axios-client';
+import '../styles/info/tabla.css'
 
 export default function Reservas() {
   const [reservas, setReservas] = useState([]);
@@ -12,31 +13,30 @@ export default function Reservas() {
     axiosClient
       .get('/getReservas')
       .then((response) => {
-        const reservasOrdenados = response.data.sort((a, b) => {
-          return new Date(a.fecha) - new Date(b.fecha);
+        const reservasOrdenadas = response.data.sort((a, b) => {
+          return new Date(b.fecha) - new Date(a.fecha); // Invertir el orden de la comparación
         });
-        setReservas(reservasOrdenados);
+        setReservas(reservasOrdenadas);
       })
       .catch((error) => {
         console.error('Error al obtener los reservas:', error);
       });
-      console.log(reservas)
   };
 
   return (
     <div>
       <h2>Reservas</h2>
-      <table>
+      <table className="reservas-table"> {/* Agregar la clase CSS para la tabla */}
         <thead>
           <tr>
-            <th>nombre</th>
-            <th>apellidos</th>
-            <th>fehca inicio</th>
-            <th>hora inicio</th>
-            <th>fecha fin</th>
-            <th>hora fin</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Fecha inicio</th>
+            <th>Hora inicio</th>
+            <th>Fecha fin</th>
+            <th>Hora fin</th>
             <th>Placa Vehículo</th>
-            <th>espacio</th>
+            <th>Espacio</th>
           </tr>
         </thead>
         <tbody>

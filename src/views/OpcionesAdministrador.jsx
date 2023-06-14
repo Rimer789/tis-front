@@ -1,7 +1,8 @@
-import React, { useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosClient from '../axios-client';
 import { useStateContext } from '../contexts/ContextProvider';
+import '../styles/info/comunicado.css'
 
 export default function EnviarComunicado() {
   const comunicadoRef = useRef();
@@ -15,7 +16,7 @@ export default function EnviarComunicado() {
       mensaje: comunicadoRef.current.value,
       para: 0
     };
-    console.log(comunicado)
+    console.log(comunicado);
     axiosClient
       .post('/enviarAnuncio', comunicado)
       .then(() => {
@@ -31,7 +32,7 @@ export default function EnviarComunicado() {
   };
 
   return (
-    <div >
+    <div className="container">
       <div className="form">
         <form onSubmit={handleSubmit}>
           <h1 className="title">Enviar Comunicado</h1>
@@ -42,8 +43,14 @@ export default function EnviarComunicado() {
               ))}
             </div>
           )}
-          <textarea ref={comunicadoRef} placeholder="Comunicado" rows={4} cols={50} />
-          <br/>
+          <textarea
+            ref={comunicadoRef}
+            className="textarea"
+            placeholder="Comunicado"
+            rows={4}
+            cols={50}
+          />
+          <br />
           <button className="btn">Enviar</button>
         </form>
       </div>

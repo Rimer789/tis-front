@@ -2,7 +2,8 @@ import React, { useEffect, useState} from 'react';
 import { Link, Navigate, Outlet } from 'react-router-dom';
 import { useStateContext } from '../contexts/ContextProvider';
 import axiosClient from '../axios-client';
-import { HiOutlineUserCircle } from "react-icons/hi";
+import { HiOutlineUserCircle, HiOutlineTemplate } from "react-icons/hi";
+import { IoCarSportSharp, IoNewspaperOutline, IoChatbox,IoCashOutline } from "react-icons/io5";
 import "../styles/info/User.css"
 
 export default function DefaultLayout() {
@@ -36,10 +37,10 @@ export default function DefaultLayout() {
     });
   };
 
-  return (
+  return ( 
     <div id="defaultLayout">
       <aside className={asideClass}>
-        <Link to="/parqueo">Parqueo</Link>
+        <Link to="/parqueo"> <HiOutlineTemplate size={15}/>  Parqueo</Link>
         
 
         {rol.rol === 'administrador' && (
@@ -63,15 +64,15 @@ export default function DefaultLayout() {
 
         {rol.rol === 'cliente' && (
           <>
-            <Link to="/opcionesCliente">Mis Vehiculos</Link>
-            <Link to="/historial">Historial</Link>
+            <Link to="/opcionesCliente"> <IoCarSportSharp size={20}/>  Mis Vehiculos</Link>
+            <Link to="/historial"><IoNewspaperOutline/> Historial</Link>
             {/* <Link to="/deudas">Deudas</Link> */}
-            <Link to="/comunicados">Comunicados</Link>
+            <Link to="/comunicados"><IoChatbox/> Comunicados</Link>
           </>
         )}
 
        
-        <Link to="/precios">Precios</Link>
+        <Link to="/precios"><IoCashOutline/> Precios</Link>
       </aside>
 
       <div className="content">
