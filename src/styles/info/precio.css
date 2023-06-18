@@ -1,0 +1,26 @@
+.accordion-item {
+    margin-bottom: 10px;
+  }
+  
+  .accordion-title {
+    background-color: #3aecb1;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 15px;
+  }
+  
+  .accordion-title.active {
+    background-color: #268ccf;
+  }
+  
+  .accordion-content {
+    margin-top: 10px;
+    background-color: #53df1c;
+    padding: 10px;
+    border-radius: 15px;
+    display: inline-block;
+    border-top: 1px solid #ddd;
+  }
+  

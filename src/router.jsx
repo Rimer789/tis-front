@@ -54,7 +54,7 @@ const router = createBrowserRouter([
            // {path: '/reportes', element: <Reportes/>},
            // {path: '/guardias', element: <Guardias/>},
             {path: '/historial', element: <Historial/>},
-           // {path: '/deudas', element: <Deudas/>},
+            {path: '/deudas', element: <Deudas/>},
             {path: '/comunicados', element: <Comunicados/>},
             {path: '/precios', element: <Precios/>},
             {path: '/cuenta', element: <Cuenta/>},

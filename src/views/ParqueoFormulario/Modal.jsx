@@ -199,7 +199,7 @@ const [celular, setCelular] = useState('');
       </div>
             
             <br/>
-            <label>hora inicio:</label>
+            <label>fecha inicio:</label>
             <DatePicker
               selected={startDate}
               onChange={handleStartDateChange}
@@ -212,7 +212,7 @@ const [celular, setCelular] = useState('');
               dateFormat='MMMM d, yyyy h:mm aa'
             />
             <br />
-            <label>hora fin:</label>
+            <label>fecha fin:</label>
             <DatePicker
               selected={endDate}
               onChange={handleEndDateChange}

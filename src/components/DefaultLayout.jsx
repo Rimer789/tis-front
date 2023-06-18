@@ -48,6 +48,8 @@ export default function DefaultLayout() {
             <Link to="/opcionesAdministrador">Enviar Comunicados</Link>
             <Link to="/users">Clientes</Link>
             <Link to="/reservas">Ver Reservas</Link>
+            <Link to="/historial"><IoNewspaperOutline/> Historial</Link>
+            <Link to="/deudas">Grafico</Link> 
             {/* <Link to="/cobros">Cobros</Link> */}
             {/* <Link to="/reportes">Reportes</Link> */}
             {/* <Link to="/guardias">Guardias</Link> */}
@@ -65,8 +67,9 @@ export default function DefaultLayout() {
         {rol.rol === 'cliente' && (
           <>
             <Link to="/opcionesCliente"> <IoCarSportSharp size={20}/>  Mis Vehiculos</Link>
+          
+             <Link to="/deudas">Deudas</Link> 
             <Link to="/historial"><IoNewspaperOutline/> Historial</Link>
-            {/* <Link to="/deudas">Deudas</Link> */}
             <Link to="/comunicados"><IoChatbox/> Comunicados</Link>
           </>
         )}
@@ -77,8 +80,13 @@ export default function DefaultLayout() {
 
       <div className="content">
         <header>
+          <div>Nombre: {user.name}</div>
+          <div>Rol: {user.rol}</div>
+          <a href="#" onClick={onLogout} className="btn-logout">
+              Logout
+            </a>
           
-          <div className="user-info">
+          {/* <div className="user-info">
       <HiOutlineUserCircle size={40} onClick={handleUserIconClick} /> 
       {showUserInfo && (
         <div className="user-details">
@@ -90,7 +98,7 @@ export default function DefaultLayout() {
             </a>
         </div>
       )}
-    </div>
+    </div> */}
         </header>
 
         <main>
